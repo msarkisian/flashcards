@@ -1,10 +1,12 @@
 html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .card {
   display: flex;
   flex-flow: column wrap;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid black;
   width: 60%;
   min-height: 200px;

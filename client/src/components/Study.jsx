@@ -1,9 +1,11 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { Card } from './Card';
 
-export const Study = ({ deckId }) => {
-  const [deck, loadingDeck] = useFetch(`decks/${deckId}`);
+export const Study = ({}) => {
+  const { deckId } = useParams();
+  const [deck, loadingDeck] = useFetch(`/decks/${deckId}`);
 
   if (loadingDeck) {
     return <h4>Loading, please wait</h4>;

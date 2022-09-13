@@ -2,7 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 const deckSchema = new Schema({
   name: { type: String, required: true },
-  owner: mongoose.Types.ObjectId,
   description: String,
   cards: [
     {

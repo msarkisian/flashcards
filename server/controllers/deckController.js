@@ -1,6 +1,18 @@
 import Deck from '../models/deckModel.js';
 const deckController = {};
 
+deckController.getDecks = async (req, res, next) => {
+  try {
+    const decks = await Deck.find({}, '_id name');
+    res.locals.decks = decks;
+    next();
+  } catch (err) {
+    next({
+      log: 'Error in getDecks: ' + err,
+      message: 'Error getting decks from database',
+    });
+  }
+};
 deckController.getDeck = async (req, res, next) => {
   try {
     const deck = await Deck.findOne({ _id: req.params.id });
