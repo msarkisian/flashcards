@@ -8,6 +8,7 @@ export default defineConfig({
     proxy: {
       '/decks': 'http://localhost:3000',
       '/register': 'http://localhost:3000',
+      '/login': 'http://localhost:3000',
     },
   },
 });

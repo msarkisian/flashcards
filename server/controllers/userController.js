@@ -31,4 +31,26 @@ userController.addUser = async (req, res, next) => {
   }
 };
 
+userController.verifyUser = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const user = await User.findOne({ username: req.body.username });
+    const verified = await bcrypt.compare(req.body.password, user.passwordHash);
+    if (verified) {
+      res.locals.user = user;
+      return next();
+    }
+    return next({
+      log: null,
+      status: 400,
+      message: 'Invalid username or password',
+    });
+  } catch (err) {
+    next({
+      log: 'Error in verifyUser: ' + err,
+      message: 'Error verifying user',
+    });
+  }
+};
+
 export default userController;

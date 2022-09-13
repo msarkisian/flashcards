@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
 import express from 'express';
 import { default as mongoose } from 'mongoose';
 import registerRouter from './routes/register.js';
 import decksRouter from './routes/decks.js';
+import userController from './controllers/userController.js';
+import jwtController from './controllers/jwtController.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,6 +15,16 @@ app.use(express.json());
 
 app.use('/register', registerRouter);
 app.use('/decks', decksRouter);
+
+app.post(
+  '/login',
+  userController.verifyUser,
+  jwtController.write,
+  (req, res) => {
+    res.cookie('jwt', res.locals.jwt, { httpOnly: true });
+    res.sendStatus(204);
+  }
+);
 
 app.use('*', (req, res) => {
   res.status(404).send('404: Page Not Found');
