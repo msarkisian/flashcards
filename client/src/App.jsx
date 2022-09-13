@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -10,6 +11,18 @@ import { UserContext } from './userContext';
 
 function App() {
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    fetch('/login')
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        if (json.username)
+          setUser({
+            username: json.username,
+            id: json.userId,
+          });
+      });
+  }, []);
   return (
     <>
       <UserContext.Provider value={[user, setUser]}>

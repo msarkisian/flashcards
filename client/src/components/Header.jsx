@@ -4,5 +4,9 @@ import { UserContext } from '../userContext';
 
 export const Header = () => {
   const [user, setUser] = useContext(UserContext);
-  return <header className={headerStyles.header}>{user}</header>;
+  return (
+    <header className={headerStyles.header}>
+      {user ? user.username : 'Log in!'}
+    </header>
+  );
 };
