@@ -1,5 +1,10 @@
 import React from 'react';
 
 export const Splash = ({}) => {
-  return <div>Welcome</div>;
+  return (
+  <div>
+  <div>Welcome</div>
+  <button>test</button>
+  </div>
+  )
 };

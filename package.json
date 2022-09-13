@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite serve client/",
+    "dev": "concurrently \"vite serve client/\" \"nodemon server/index.js\"",
     "build": "vite build client/",
     "preview": "vite preview client/"
   },
@@ -23,6 +23,7 @@
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.1.0",
+    "concurrently": "^7.4.0",
     "nodemon": "^2.0.19",
     "vite": "^3.1.0"
   }

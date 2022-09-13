@@ -7,8 +7,8 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .then(
     Deck.create({
-      name: 'Example2',
-      description: 'Another example card deck',
+      name: 'Country Capitals',
+      description: 'All the countries of the world and their capitals',
       cards: [
         { front: 'Abkhazia', back: 'Sukhumi' },
         { front: 'Afghanistan', back: 'Kabul' },
