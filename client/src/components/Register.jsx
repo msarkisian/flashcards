@@ -1,18 +1,20 @@
-import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../userContext';
+import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+export const Register = () => {
   const [user, setUser] = useContext(UserContext);
   const navigate = useNavigate();
+
   const handleSumbit = (e) => {
     e.preventDefault();
     const body = JSON.stringify({
       username: e.target.username.value,
       password: e.target.password.value,
     });
-    fetch('/login/', {
+    fetch('/register/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: body,

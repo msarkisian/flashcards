@@ -18,10 +18,7 @@ userController.addUser = async (req, res, next) => {
       username: req.body.username,
       passwordHash: passwordHash,
     });
-    res.locals.user = {
-      id: newUser._id,
-      username: newUser.username,
-    };
+    res.locals.user = newUser;
     next();
   } catch (err) {
     return next({

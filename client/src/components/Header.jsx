@@ -20,7 +20,10 @@ export const Header = () => {
           <button onClick={handleLogout}>Log Out</button>
         </div>
       ) : (
-        <Link to={'/signin'}>Log in</Link>
+        <div>
+          <Link to={'/signin'}>Log in</Link>
+          <Link to={'/signup'}>Register</Link>
+        </div>
       )}
     </header>
   );
