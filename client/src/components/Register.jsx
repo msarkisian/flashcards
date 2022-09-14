@@ -32,7 +32,7 @@ export const Register = () => {
         <input name="username" id="username" />
         <label htmlFor="password">Password:</label>
         <input type="password" name="password" id="password" />
-        <input type="submit" value="Log in" />
+        <input type="submit" value="Register" />
       </form>
       <Link to={'/'}>Go home</Link>
     </div>
