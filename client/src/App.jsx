@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { Header } from './components/Header';
+import { Home } from './components/Home';
 import { Login } from './components/Login';
 import { PublicDecks } from './components/PublicDecks';
 import { Splash } from './components/Splash';
@@ -28,7 +29,11 @@ function App() {
       <UserContext.Provider value={[user, setUser]}>
         <Header />
         <Routes>
-          <Route path="/" element={<Splash />} />
+          {user ? (
+            <Route path="/" element={<Home />} />
+          ) : (
+            <Route path="/" element={<Splash />} />
+          )}
           <Route path="/signin" element={<Login />} />
           <Route path="/decklist" element={<PublicDecks />} />
           <Route path="/study/:deckId" element={<Study />} />

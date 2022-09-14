@@ -7,7 +7,7 @@ export const PublicDecks = () => {
   if (loadingDecks) return <h2>Loading list of decks...</h2>;
   return (
     <div>
-      <h1>Public flashcard decks you can study:</h1>
+      <h1>Public flashcard decks:</h1>
       <ul>
         {decks.map((deck) => (
           <li key={deck._id}>
