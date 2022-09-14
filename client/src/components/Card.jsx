@@ -9,15 +9,6 @@ export const Card = ({ deck }) => {
   const [front, setFront] = useState(true);
   const [cards, setCards] = useState(() => deck.cards);
 
-  // const nextCard = () => {
-  //   if (cardIndex !== deck.cards.length - 1) setCardIndex(cardIndex + 1);
-  //   else setCardIndex(0);
-  //   setFront(true);
-  // };
-  // const removeCard = () => {
-  //   deck.cards.splice(cardIndex, 1);
-  //   setCardIndex(cardIndex);
-  // };
   const nextCard = () => {
     setCards([...cards.slice(1), cards[0]]);
   };

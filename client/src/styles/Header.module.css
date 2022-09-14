@@ -6,4 +6,19 @@
   height: 50px;
   width: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header>div {
+  display: flex;
+}
+
+.header>div>* {
+  margin: 4px;
+}
+
+.header>* {
+  padding: 10px;
 }

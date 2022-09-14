@@ -32,6 +32,10 @@ app.post(
       .json({ username: res.locals.user.username, id: res.locals.user._id });
   }
 );
+app.delete('/login', (req, res) => {
+  res.clearCookie('jwt');
+  res.sendStatus(204);
+});
 
 app.use('*', (req, res) => {
   res.status(404).send('404: Page Not Found');
