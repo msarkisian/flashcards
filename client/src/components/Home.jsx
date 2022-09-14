@@ -8,7 +8,14 @@ export const Home = () => {
   return (
     <div>
       <div>Logged in as {user.username}</div>
-      <Link to={'/decklist'}>List of Public Flashcard Decks</Link>
+      <ul>
+        <li>
+          <Link to={'/privatedecks'}>My Flashcard Decks</Link>
+        </li>
+        <li>
+          <Link to={'/decklist'}>List of Public Flashcard Decks</Link>
+        </li>
+      </ul>
     </div>
   );
 };

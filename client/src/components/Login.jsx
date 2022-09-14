@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../userContext';
 
 export const Login = () => {
   const [user, setUser] = useContext(UserContext);
+  const [loginError, setLoginError] = useState(false);
   const navigate = useNavigate();
   const handleSumbit = (e) => {
     e.preventDefault();
@@ -19,8 +21,15 @@ export const Login = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        setUser(json);
-        navigate('/');
+        if (json.error) {
+          setLoginError(true);
+          setTimeout(() => {
+            setLoginError(false);
+          }, 2000);
+        } else {
+          setUser(json);
+          navigate('/');
+        }
       });
   };
   return (
@@ -32,6 +41,7 @@ export const Login = () => {
         <input type="password" name="password" id="password" />
         <input type="submit" value="Log in" />
       </form>
+      {loginError && <div>Invalid username or password</div>}
       <Link to={'/'}>Go home</Link>
     </div>
   );

@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import headerStyles from '../styles/Header.module.css';
 import { UserContext } from '../userContext';
 
 export const Header = () => {
   const [user, setUser] = useContext(UserContext);
+  const navigate = useNavigate();
   const handleLogout = () => {
     fetch('/login', {
       method: 'DELETE',
-    }).then(() => setUser(null));
+    }).then(() => {
+      setUser(null);
+      navigate('/');
+    });
   };
   return (
     <header className={headerStyles.header}>

@@ -5,6 +5,7 @@ import { Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Home } from './components/Home';
 import { Login } from './components/Login';
+import { PrivateDecks } from './components/PrivateDecks';
 import { PublicDecks } from './components/PublicDecks';
 import { Register } from './components/Register';
 import { Splash } from './components/Splash';
@@ -37,6 +38,7 @@ function App() {
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/decklist" element={<PublicDecks />} />
+          <Route path="/privatedecks" element={<PrivateDecks />} />
           <Route path="/study/:deckId" element={<Study />} />
         </Routes>
       </UserContext.Provider>

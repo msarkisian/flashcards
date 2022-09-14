@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 
 const userController = {};
 const SALT_WORK_FACTOR = 10;
+const DUMMY_HASH =
+  'FgXwU7cemHIb108LOLdgOTDf95Fne8swhgEymE2zx2P620VOGeYN7izBBWv9POy';
+// ^ to be compared in lieu of the looked up hash if the looked up hash does not exist
 
 userController.addUser = async (req, res, next) => {
   if (!req.body.username || !req.body.password) {
@@ -31,7 +34,9 @@ userController.addUser = async (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ username: req.body.username });
-    const verified = await bcrypt.compare(req.body.password, user.passwordHash);
+    let passwordHash;
+    user ? (passwordHash = user.passwordHash) : (passwordHash = DUMMY_HASH);
+    const verified = await bcrypt.compare(req.body.password, passwordHash);
     if (verified) {
       res.locals.user = user;
       return next();
