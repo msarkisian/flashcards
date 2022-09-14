@@ -12,6 +12,12 @@ export const PublicDecks = () => {
         {decks.map((deck) => (
           <li key={deck._id}>
             <Link to={`/study/${deck._id}`}>{deck.name}</Link>
+            {
+              <>
+                {' '}
+                ({deck.cardCount} card{deck.cardCount !== 1 && <>s</>})
+              </>
+            }
           </li>
         ))}
       </ul>

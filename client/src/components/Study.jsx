@@ -17,7 +17,7 @@ export const Study = ({ personal }) => {
       <h1>{deck.name}</h1>
       {deck.description && <h3>{deck.description}</h3>}
       <div>
-        <Card deck={deck} />
+        <Card deck={deck} personal={personal} />
       </div>
     </div>
   );

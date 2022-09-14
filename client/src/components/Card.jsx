@@ -4,7 +4,7 @@ import '../styles/style.css';
 import cardStyles from '../styles/Card.module.css';
 import { Link } from 'react-router-dom';
 
-export const Card = ({ deck }) => {
+export const Card = ({ deck, personal }) => {
   const [front, setFront] = useState(true);
   const [cards, setCards] = useState(() => deck.cards);
 
@@ -29,8 +29,15 @@ export const Card = ({ deck }) => {
       <div>
         <h2>You've finished studying for now!</h2>
         <ul>
+          {personal && (
+            <li>
+              <Link to={'/userdecks'}>Back to my decks</Link>
+            </li>
+          )}
           <li>
-            <Link to={'/decklist'}>Browse another deck</Link>
+            <Link to={'/decklist'}>
+              {personal ? <>Browse public decks</> : <>Browse another deck</>}
+            </Link>
           </li>
           <li>
             <Link to={'/'}>Go home</Link>
@@ -41,7 +48,9 @@ export const Card = ({ deck }) => {
 
   return (
     <>
-      <div>{cards.length} cards remaining</div>
+      <div>
+        {cards.length} card{cards.length !== 1 && <>s</>} remaining
+      </div>
       <div className="card">
         {front ? <h4>{cards[0].front}</h4> : <h4>{cards[0].back}</h4>}
         <div>

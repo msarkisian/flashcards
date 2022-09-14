@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 export const PrivateDecks = () => {
   const [user] = useContext(UserContext);
   let [decks, loadingDecks, setDecks] = useFetch('/userdecks');
-  const navigate = useNavigate();
   const handleDelete = (id) => {
     fetch(`/userdecks/${id}`, {
       method: 'DELETE',
@@ -36,6 +35,12 @@ export const PrivateDecks = () => {
         {decks.map((deck) => (
           <li key={deck._id}>
             <Link to={`/study/private/${deck._id}`}>{deck.name}</Link>
+            {
+              <>
+                {' '}
+                ({deck.cardCount} card{deck.cardCount !== 1 && <>s</>})
+              </>
+            }
             <button onClick={() => handleDelete(deck._id)}>Delete deck</button>
           </li>
         ))}

@@ -3,8 +3,10 @@ const deckController = {};
 
 deckController.getDecks = async (req, res, next) => {
   try {
-    const decks = await Deck.find({}, '_id name');
-    res.locals.decks = decks;
+    const decks = await Deck.find({});
+    res.locals.decks = decks.map((deck) => {
+      return { _id: deck._id, name: deck.name, cardCount: deck.cards.length };
+    });
     next();
   } catch (err) {
     next({
