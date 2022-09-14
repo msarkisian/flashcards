@@ -15,5 +15,5 @@ export const useFetch = (url, method = 'GET', body = null) => {
         setLoading(false);
       });
   }, [url]);
-  return [data, loading];
+  return [data, loading, setData];
 };

@@ -75,4 +75,21 @@ userDeckController.addUserDeck = async (req, res, next) => {
   }
 };
 
+userDeckController.deleteUserDeck = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ _id: res.locals.user.userId });
+    user.decks = user.decks.filter(
+      (deck) => deck._id.toString() !== req.params.id
+    );
+    await user.save();
+    next();
+  } catch (err) {
+    next({
+      log: 'Error in deleteUserDeck: ' + err,
+      status: 500,
+      message: 'Error deleting user deck',
+    });
+  }
+};
+
 export default userDeckController;

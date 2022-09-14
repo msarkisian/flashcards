@@ -3,10 +3,21 @@ import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { UserContext } from '../userContext';
+import { useNavigate } from 'react-router-dom';
 
 export const PrivateDecks = () => {
   const [user] = useContext(UserContext);
-  const [decks, loadingDecks] = useFetch('/userdecks');
+  let [decks, loadingDecks, setDecks] = useFetch('/userdecks');
+  const navigate = useNavigate();
+  const handleDelete = (id) => {
+    fetch(`/userdecks/${id}`, {
+      method: 'DELETE',
+    }).then((res) => {
+      if (res.status === 204) {
+        setDecks([...decks.filter((deck) => deck._id !== id)]);
+      }
+    });
+  };
   if (!user)
     return (
       <div>
@@ -25,6 +36,7 @@ export const PrivateDecks = () => {
         {decks.map((deck) => (
           <li key={deck._id}>
             <Link to={`/study/private/${deck._id}`}>{deck.name}</Link>
+            <button onClick={() => handleDelete(deck._id)}>Delete deck</button>
           </li>
         ))}
       </ul>

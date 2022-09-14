@@ -28,5 +28,13 @@ router.post(
     res.status(200).json(res.locals.userDeck);
   }
 );
+router.delete(
+  '/:id',
+  jwtController.verify,
+  userDeckController.deleteUserDeck,
+  (req, res) => {
+    res.sendStatus(204);
+  }
+);
 
 export default router;
