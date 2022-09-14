@@ -12,6 +12,14 @@ router.get(
     res.status(200).json(res.locals.userDecks);
   }
 );
+router.get(
+  '/:id',
+  jwtController.verify,
+  userDeckController.getUserDeck,
+  (req, res) => {
+    res.status(200).json(res.locals.deck);
+  }
+);
 router.post(
   '/',
   jwtController.verify,

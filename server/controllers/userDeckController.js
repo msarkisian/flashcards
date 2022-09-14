@@ -9,6 +9,7 @@ userDeckController.getUserDecks = async (req, res, next) => {
       const obj = {
         name: deck.name,
         cardCount: deck.cards.length,
+        _id: deck._id,
       };
       if (deck.description) obj.description = deck.description;
       return obj;
@@ -19,6 +20,23 @@ userDeckController.getUserDecks = async (req, res, next) => {
       log: 'Error in getUserDecks: ' + err,
       status: 500,
       message: 'Error getting user decks',
+    });
+  }
+};
+
+userDeckController.getUserDeck = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ _id: res.locals.user.userId });
+    const deck = user.decks.find(
+      (deck) => deck._id.toString() === req.params.id
+    );
+    res.locals.deck = deck;
+    next();
+  } catch (err) {
+    next({
+      log: 'Error in getUserDeck: ' + err,
+      status: 500,
+      message: 'Error getting user deck',
     });
   }
 };

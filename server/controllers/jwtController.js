@@ -17,6 +17,13 @@ jwtController.write = (req, res, next) => {
 
 jwtController.verify = (req, res, next) => {
   try {
+    if (!req.cookies.jwt) {
+      return next({
+        log: null,
+        status: 401,
+        message: 'You are not logged in',
+      });
+    }
     const info = jwt.verify(req.cookies.jwt, JWT_SECRET);
     res.locals.isLoggedIn = true;
     res.locals.user = info;
@@ -24,7 +31,7 @@ jwtController.verify = (req, res, next) => {
   } catch {
     next({
       log: null,
-      status: 400,
+      status: 401,
       message: 'Invalid JWT. Try logging in again.',
     });
   }

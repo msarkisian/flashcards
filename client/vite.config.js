@@ -9,6 +9,7 @@ export default defineConfig({
       '/decks': 'http://localhost:3000',
       '/register': 'http://localhost:3000',
       '/login': 'http://localhost:3000',
+      '/userdecks': 'http://localhost:3000',
     },
   },
 });

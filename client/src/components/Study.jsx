@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { Card } from './Card';
 
-export const Study = ({}) => {
+export const Study = ({ personal }) => {
   const { deckId } = useParams();
-  const [deck, loadingDeck] = useFetch(`/decks/${deckId}`);
+  const [deck, loadingDeck] = useFetch(
+    personal ? `/userdecks/${deckId}` : `/decks/${deckId}`
+  );
 
   if (loadingDeck) {
     return <h4>Loading, please wait</h4>;

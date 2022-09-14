@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Routes } from 'react-router-dom';
 import { Route } from 'react-router-dom';
+import { Create } from './components/Create';
 import { Header } from './components/Header';
 import { Home } from './components/Home';
 import { Login } from './components/Login';
@@ -39,7 +40,12 @@ function App() {
           <Route path="/signup" element={<Register />} />
           <Route path="/decklist" element={<PublicDecks />} />
           <Route path="/privatedecks" element={<PrivateDecks />} />
-          <Route path="/study/:deckId" element={<Study />} />
+          <Route
+            path="/study/private/:deckId"
+            element={<Study personal={true} />}
+          />
+          <Route path="/study/:deckId" element={<Study personal={false} />} />
+          <Route path="/create" element={<Create />} />
         </Routes>
       </UserContext.Provider>
     </>
