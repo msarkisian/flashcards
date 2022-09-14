@@ -4,6 +4,14 @@ import userDeckController from '../controllers/userDeckController.js';
 
 const router = Router();
 
+router.get(
+  '/',
+  jwtController.verify,
+  userDeckController.getUserDecks,
+  (req, res) => {
+    res.status(200).json(res.locals.userDecks);
+  }
+);
 router.post(
   '/',
   jwtController.verify,

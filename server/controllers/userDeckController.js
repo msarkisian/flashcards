@@ -2,6 +2,27 @@ import User from '../models/userModel.js';
 
 const userDeckController = {};
 
+userDeckController.getUserDecks = async (req, res, next) => {
+  try {
+    const user = await User.findOne({ _id: res.locals.user.userId });
+    res.locals.userDecks = user.decks.map((deck) => {
+      const obj = {
+        name: deck.name,
+        cardCount: deck.cards.length,
+      };
+      if (deck.description) obj.description = deck.description;
+      return obj;
+    });
+    next();
+  } catch (err) {
+    next({
+      log: 'Error in getUserDecks: ' + err,
+      status: 500,
+      message: 'Error getting user decks',
+    });
+  }
+};
+
 userDeckController.addUserDeck = async (req, res, next) => {
   if (!req.body.name)
     return next({
