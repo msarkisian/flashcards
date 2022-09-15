@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../userContext';
+import loginStyles from '../styles/Login.module.css';
 
 export const Login = () => {
   const [user, setUser] = useContext(UserContext);
@@ -31,13 +32,21 @@ export const Login = () => {
       });
   };
   return (
-    <div>
-      <form onSubmit={(e) => handleSumbit(e)}>
-        <label htmlFor="username">Username:</label>
-        <input name="username" id="username" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" />
-        <input type="submit" value="Log in" />
+    <div className={loginStyles.loginContainer}>
+      <form className={loginStyles.loginForm} onSubmit={(e) => handleSumbit(e)}>
+        <div>
+          <div>
+            <label htmlFor="username">Username:</label>
+          </div>
+          <input name="username" id="username" />
+        </div>
+        <div>
+          <div>
+            <label htmlFor="password">Password:</label>
+          </div>
+          <input type="password" name="password" id="password" />
+        </div>
+        <input id={loginStyles.loginButton} type="submit" value="Log in" />
       </form>
       {loginError && <div>Invalid username or password</div>}
       <Link to={'/'}>Go home</Link>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../userContext';
+import loginStyles from '../styles/Login.module.css';
 
 export const Register = () => {
   const [user, setUser] = useContext(UserContext);
@@ -24,13 +25,17 @@ export const Register = () => {
       });
   };
   return (
-    <div>
-      <form onSubmit={(e) => handleSumbit(e)}>
-        <label htmlFor="username">Username:</label>
-        <input name="username" id="username" />
-        <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" />
-        <input type="submit" value="Register" />
+    <div className={loginStyles.loginContainer}>
+      <form className={loginStyles.loginForm} onSubmit={(e) => handleSumbit(e)}>
+        <div>
+          <label htmlFor="username">Username:</label>
+          <input name="username" id="username" />
+        </div>
+        <div>
+          <label htmlFor="password">Password:</label>
+          <input type="password" name="password" id="password" />
+        </div>
+        <input id={loginStyles.loginButton} type="submit" value="Register" />
       </form>
       <Link to={'/'}>Go home</Link>
     </div>
