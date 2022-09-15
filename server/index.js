@@ -5,7 +5,9 @@ import decksRouter from './routes/decks.js';
 import loginRouter from './routes/login.js';
 import registerRouter from './routes/register.js';
 import userDecksRouter from './routes/userDecks.js';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = express();

@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../../constants.js';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
+const JWT_SECRET = process.env.JWT_SECRET || 'placeholder secret';
 const jwtController = {};
 
 jwtController.write = (req, res, next) => {
