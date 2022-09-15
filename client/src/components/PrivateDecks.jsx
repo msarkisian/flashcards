@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { UserContext } from '../userContext';
+import listStyles from '../styles/List.module.css';
 
 export const PrivateDecks = () => {
   const [user] = useContext(UserContext);
+  const navigate = useNavigate();
   let [decks, loadingDecks, setDecks] = useFetch('/userdecks');
   const handleDelete = (id) => {
     fetch(`/userdecks/${id}`, {
@@ -29,7 +31,7 @@ export const PrivateDecks = () => {
       ) : (
         <h2>You haven't made any flashcard decks yet!</h2>
       )}
-      <ul>
+      <ul className={listStyles.list}>
         {decks.map((deck) => (
           <li key={deck._id}>
             <Link to={`/study/private/${deck._id}`}>{deck.name}</Link>
@@ -39,8 +41,9 @@ export const PrivateDecks = () => {
                 ({deck.cardCount} card{deck.cardCount !== 1 && <>s</>})
               </>
             }
-            <Link to={`/edit/${deck._id}`}>Edit deck</Link>
-            <button onClick={() => handleDelete(deck._id)}>Delete deck</button>
+            {/* <Link to={`/edit/${deck._id}`}>Edit deck</Link> */}
+            <button onClick={() => navigate(`/edit/${deck._id}`)}>Edit</button>
+            <button onClick={() => handleDelete(deck._id)}>Delete</button>
           </li>
         ))}
       </ul>

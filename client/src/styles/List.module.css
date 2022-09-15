@@ -1,0 +1,18 @@
+.list>li {
+  margin: 10px;
+}
+
+.list button {
+  cursor: pointer;
+  margin: 4px;
+  border: none;
+  background-color: #D4A373;
+}
+
+.list button:hover {
+  background-color: hsl(30, 53%, 74%);
+}
+
+.list button:active {
+  background-color: hsl(30, 53%, 90%);
+}
