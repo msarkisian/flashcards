@@ -28,6 +28,15 @@ router.post(
     res.status(200).json(res.locals.userDeck);
   }
 );
+router.put(
+  '/:id',
+  jwtController.verify,
+  userDeckController.addUserDeck,
+  userDeckController.deleteUserDeck,
+  (req, res) => {
+    res.status(200).json(res.locals.userDeck);
+  }
+);
 router.delete(
   '/:id',
   jwtController.verify,

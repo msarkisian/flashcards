@@ -4,25 +4,30 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../userContext';
 import { DraftCard } from './DraftCard';
 
-export const Create = () => {
+export const Create = ({ edit }) => {
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
   const [draft, setDraft] = useState([]);
+  const [fetching, setFetching] = useState(false);
   const [sumbitError, setSubmitError] = useState(false);
   const [user] = useContext(UserContext);
   const cardKey = useRef(0);
   const navigate = useNavigate();
+  const { deckId } = useParams();
   useEffect(() => {
-    if (window.localStorage.getItem('deckDraft'))
-      setDraft(JSON.parse(window.localStorage.getItem('deckDraft')));
-    if (window.localStorage.getItem('titleDraft'))
-      setTitle(window.localStorage.getItem('titleDraft'));
-    if (window.localStorage.getItem('descDraft'))
-      setDesc(window.localStorage.getItem('descDraft'));
+    if (!edit) {
+      if (window.localStorage.getItem('deckDraft'))
+        setDraft(JSON.parse(window.localStorage.getItem('deckDraft')));
+      if (window.localStorage.getItem('titleDraft'))
+        setTitle(window.localStorage.getItem('titleDraft'));
+      if (window.localStorage.getItem('descDraft'))
+        setDesc(window.localStorage.getItem('descDraft'));
+    }
   }, []);
   useEffect(() => {
     window.localStorage.setItem('deckDraft', JSON.stringify(draft));
@@ -33,6 +38,25 @@ export const Create = () => {
   useEffect(() => {
     window.localStorage.setItem('descDraft', desc);
   }, [desc]);
+  useEffect(() => {
+    if (edit) {
+      setFetching(true);
+      fetch(`/userdecks/${deckId}`)
+        .then((res) => res.json())
+        .then((json) => {
+          setTitle(json.name);
+          setDraft(
+            json.cards.map((card) => {
+              card.id = cardKey.current;
+              cardKey.current++;
+              return card;
+            })
+          );
+          if (json.description) setDesc(json.description);
+          setFetching(false);
+        });
+    }
+  }, []);
 
   const handleChange = (id, side, content) => {
     const idx = draft.findIndex((card) => card.id === id);
@@ -53,6 +77,7 @@ export const Create = () => {
       setSubmitError(true);
       setTimeout(() => setSubmitError(false), 4000);
     } else {
+      setFetching(true);
       const body = {
         name: title,
         cards: draft.map((card) => {
@@ -60,8 +85,8 @@ export const Create = () => {
         }),
       };
       if (desc) body.description = desc;
-      fetch('/userdecks', {
-        method: 'POST',
+      fetch('/userdecks/' + (edit ? deckId : ''), {
+        method: edit ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       }).then((res) => {
@@ -79,11 +104,20 @@ export const Create = () => {
         Please <Link to={'/signin'}>Log in</Link> to build a flashcard deck.
       </div>
     );
+  if (fetching) return <h2>Loading, please wait</h2>;
   return (
     <>
       <h1>Deck builder</h1>
-      <input value={title} onChange={(e) => setTitle(e.target.value)} />
-      <input value={desc} onChange={(e) => setDesc(e.target.value)} />
+      <input
+        value={title}
+        placeholder={'Deck Title'}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <input
+        value={desc}
+        placeholder={'Description (optional)'}
+        onChange={(e) => setDesc(e.target.value)}
+      />
       <div>
         {draft.length} card{draft.length !== 1 && <>s</>} in deck
         <button
@@ -105,12 +139,19 @@ export const Create = () => {
           />
         );
       })}
-      {draft.length > 0 && <button onClick={submitDeck}>Create deck</button>}
+      {draft.length > 0 && (
+        <button onClick={submitDeck}>
+          {edit ? <>Edit deck</> : <>Create Deck</>}
+        </button>
+      )}
       {sumbitError && (
         <div>
           Deck requires a title. and all cards must have a front and a back.
         </div>
       )}
+      <div>
+        <Link to={'/privatedecks'}>Go back</Link>
+      </div>
     </>
   );
 };

@@ -41,6 +41,7 @@ export const PrivateDecks = () => {
                 ({deck.cardCount} card{deck.cardCount !== 1 && <>s</>})
               </>
             }
+            <Link to={`/edit/${deck._id}`}>Edit deck</Link>
             <button onClick={() => handleDelete(deck._id)}>Delete deck</button>
           </li>
         ))}

@@ -31,7 +31,7 @@ export const Card = ({ deck, personal }) => {
         <ul>
           {personal && (
             <li>
-              <Link to={'/userdecks'}>Back to my decks</Link>
+              <Link to={'/privatedecks'}>Back to my decks</Link>
             </li>
           )}
           <li>

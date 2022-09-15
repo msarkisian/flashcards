@@ -45,7 +45,8 @@ function App() {
             element={<Study personal={true} />}
           />
           <Route path="/study/:deckId" element={<Study personal={false} />} />
-          <Route path="/create" element={<Create />} />
+          <Route path="/create" element={<Create edit={false} />} />
+          <Route path="/edit/:deckId" element={<Create edit={true} />} />
         </Routes>
       </UserContext.Provider>
     </>
