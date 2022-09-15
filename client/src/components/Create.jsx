@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../userContext';
 import { DraftCard } from './DraftCard';
-import '../styles/Create.module.css';
+import createStyles from '../styles/Create.module.css';
 
 export const Create = ({ edit }) => {
   const [title, setTitle] = useState('');
@@ -107,48 +107,57 @@ export const Create = ({ edit }) => {
   return (
     <>
       <h1>Deck builder</h1>
-      <input
-        value={title}
-        placeholder={'Deck Title'}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <input
-        value={desc}
-        placeholder={'Description (optional)'}
-        onChange={(e) => setDesc(e.target.value)}
-      />
-      <div>
-        {draft.length} card{draft.length !== 1 && <>s</>} in deck
-        <button
-          onClick={() => {
-            setDraft([...draft, { id: cardKey.current, front: '', back: '' }]);
-            cardKey.current++;
-          }}
-        >
-          Add card
-        </button>
-      </div>
-      {draft.map((card) => {
-        return (
-          <DraftCard
-            card={card}
-            handleChange={handleChange}
-            handleDelete={handleDelete}
-            key={card.id}
-          />
-        );
-      })}
-      {draft.length > 0 && (
-        <button onClick={submitDeck}>
-          {edit ? <>Edit deck</> : <>Create Deck</>}
-        </button>
-      )}
-      {sumbitError && (
+      <div className={createStyles.createContainer}>
+        <input
+          className={createStyles.title}
+          value={title}
+          placeholder={'Deck Title'}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <input
+          className={createStyles.desc}
+          value={desc}
+          placeholder={'Description (optional)'}
+          onChange={(e) => setDesc(e.target.value)}
+        />
         <div>
-          Deck requires a title. and all cards must have a front and a back.
+          {draft.length} card{draft.length !== 1 && <>s</>} in deck
+          <button
+            className={createStyles.addCardButton}
+            onClick={() => {
+              setDraft([
+                ...draft,
+                { id: cardKey.current, front: '', back: '' },
+              ]);
+              cardKey.current++;
+            }}
+          >
+            Add card
+          </button>
         </div>
-      )}
-      <div>
+        {draft.map((card) => {
+          return (
+            <DraftCard
+              card={card}
+              handleChange={handleChange}
+              handleDelete={handleDelete}
+              key={card.id}
+            />
+          );
+        })}
+        {draft.length > 0 && (
+          <button
+            className={createStyles.createDeckButton}
+            onClick={submitDeck}
+          >
+            {edit ? <>Edit deck</> : <>Create Deck</>}
+          </button>
+        )}
+        {sumbitError && (
+          <div>
+            Deck requires a title. and all cards must have a front and a back.
+          </div>
+        )}
         <Link to={'/privatedecks'}>Go back</Link>
       </div>
     </>

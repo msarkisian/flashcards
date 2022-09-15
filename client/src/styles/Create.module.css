@@ -1,3 +1,82 @@
-.title {}
+.createContainer {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
 
-.desc {}
+.title {
+  font-size: 26px;
+  max-width: 500px;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+.desc {
+  font-size: 20px;
+  max-width: 700px;
+  align-self: flex-start;
+  margin-left: 10px;
+}
+
+.cardInputContainer {
+  display: flex;
+  background-color: #faedcd;
+  border: hsl(43, 82%, 69%) 1px solid;
+  border-radius: 10px;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 10px;
+  width: 80%;
+  margin-top: 4px;
+}
+
+.cardInputContainer>.cardInput {
+  width: 40%;
+  padding: 5px;
+}
+
+.createContainer input {
+  width: 80%;
+}
+
+.createContainer button {
+  max-width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.addCardButton,
+.removeCardButton {
+  background-color: #D4A373;
+}
+
+.addCardButton:hover,
+.removeCardButton:hover {
+  background-color: hsl(30, 53%, 74%);
+}
+
+.addCardButton:active,
+.removeCardButton:active {
+  background-color: hsl(30, 53%, 90%);
+}
+
+.createDeckButton {
+  margin-top: 20px;
+  height: 40px;
+  width: 120px;
+  background-color: #CCD5AE;
+}
+
+.createDeckButton:hover {
+  background-color: hsl(74, 32%, 81%);
+}
+
+.createDeckButton:active {
+  background-color: hsl(74, 32%, 86%);
+}
+
+.createContainer a {
+  align-self: flex-start;
+}
