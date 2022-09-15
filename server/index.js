@@ -1,11 +1,12 @@
 import cookieParser from 'cookie-parser';
+import * as dotenv from 'dotenv';
 import express from 'express';
 import { default as mongoose } from 'mongoose';
+import * as path from 'path';
 import decksRouter from './routes/decks.js';
 import loginRouter from './routes/login.js';
 import registerRouter from './routes/register.js';
 import userDecksRouter from './routes/userDecks.js';
-import * as dotenv from 'dotenv';
 
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -17,12 +18,20 @@ mongoose.connect(mongoURI).then(() => console.log('Connected to MongoDB'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static('client/dist'));
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
 app.use('/decks', decksRouter);
 app.use('/userdecks', userDecksRouter);
 
+app.get('/', (req, res) => {
+  try {
+    res.sendFile(path.resolve('client/dist/index.html'));
+  } catch (err) {
+    console.log(err);
+  }
+});
 app.use('*', (req, res) => {
   res.status(404).send('404: Page Not Found');
 });
