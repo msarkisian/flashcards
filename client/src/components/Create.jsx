@@ -19,11 +19,18 @@ export const Create = ({ edit }) => {
     if (!edit) {
       if (window.localStorage.getItem('deckDraft')) {
         setDraft(JSON.parse(window.localStorage.getItem('deckDraft')));
+        cardKey.current = JSON.parse(
+          window.localStorage.getItem('deckDraft')
+        ).reduce((min, card) => {
+          if (card.id >= min) return card.id + 1;
+          else return min;
+        }, 0);
       }
       if (window.localStorage.getItem('titleDraft'))
         setTitle(window.localStorage.getItem('titleDraft'));
-      if (window.localStorage.getItem('descDraft'))
+      if (window.localStorage.getItem('descDraft')) {
         setDesc(window.localStorage.getItem('descDraft'));
+      }
     }
   }, []);
   useEffect(() => {
