@@ -17,12 +17,15 @@ export const Create = ({ edit }) => {
   const [sumbitError, setSubmitError] = useState(false);
   const [user] = useContext(UserContext);
   const cardKey = useRef(0);
+  const isInitialLoad = useRef(true);
   const navigate = useNavigate();
   const { deckId } = useParams();
   useEffect(() => {
     if (!edit) {
-      if (window.localStorage.getItem('deckDraft'))
+      if (window.localStorage.getItem('deckDraft')) {
+        console.log(window.localStorage.getItem('deckDraft'));
         setDraft(JSON.parse(window.localStorage.getItem('deckDraft')));
+      }
       if (window.localStorage.getItem('titleDraft'))
         setTitle(window.localStorage.getItem('titleDraft'));
       if (window.localStorage.getItem('descDraft'))
@@ -30,13 +33,15 @@ export const Create = ({ edit }) => {
     }
   }, []);
   useEffect(() => {
-    window.localStorage.setItem('deckDraft', JSON.stringify(draft));
+    if (isInitialLoad.current) isInitialLoad.current = false;
+    else if (!edit)
+      window.localStorage.setItem('deckDraft', JSON.stringify(draft));
   }, [draft]);
   useEffect(() => {
-    window.localStorage.setItem('titleDraft', title);
+    if (!edit) window.localStorage.setItem('titleDraft', title);
   }, [title]);
   useEffect(() => {
-    window.localStorage.setItem('descDraft', desc);
+    if (!edit) window.localStorage.setItem('descDraft', desc);
   }, [desc]);
   useEffect(() => {
     if (edit) {
