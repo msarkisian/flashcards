@@ -1,12 +1,10 @@
+import cookieParser from 'cookie-parser';
 import express from 'express';
 import { default as mongoose } from 'mongoose';
-import cookieParser from 'cookie-parser';
-import registerRouter from './routes/register.js';
 import decksRouter from './routes/decks.js';
 import loginRouter from './routes/login.js';
+import registerRouter from './routes/register.js';
 import userDecksRouter from './routes/userDecks.js';
-import userController from './controllers/userController.js';
-import jwtController from './controllers/jwtController.js';
 
 const PORT = process.env.PORT || 3000;
 

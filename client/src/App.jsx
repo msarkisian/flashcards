@@ -1,7 +1,5 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { Routes } from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { Create } from './components/Create';
 import { Header } from './components/Header';
 import { Home } from './components/Home';

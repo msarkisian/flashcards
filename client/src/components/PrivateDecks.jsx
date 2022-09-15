@@ -1,9 +1,7 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { UserContext } from '../userContext';
-import { useNavigate } from 'react-router-dom';
 
 export const PrivateDecks = () => {
   const [user] = useContext(UserContext);

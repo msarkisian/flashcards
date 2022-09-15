@@ -1,8 +1,7 @@
-import React from 'react';
-import { useState } from 'react';
-import '../styles/style.css';
-import cardStyles from '../styles/Card.module.css';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import cardStyles from '../styles/Card.module.css';
+import '../styles/style.css';
 
 export const Card = ({ deck, personal }) => {
   const [front, setFront] = useState(true);
