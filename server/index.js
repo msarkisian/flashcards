@@ -12,7 +12,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-const mongoURI = 'mongodb://127.0.0.1/flashcards';
+const mongoURI = process.env.MONGO_URI || 'mongodb://127.0.0.1/flashcards';
 mongoose.connect(mongoURI).then(() => console.log('Connected to MongoDB'));
 
 app.use(express.json());
