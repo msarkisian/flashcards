@@ -16,11 +16,13 @@ export const Header = () => {
   };
   return (
     <header className={headerStyles.header}>
-      <div>Flashcard App (name pending)</div>
+      <div>
+        <Link to={'/'}>Flashcards</Link>
+      </div>
       {/* <div>{user ? user.username : 'Log in!'}</div> */}
       {user ? (
         <div>
-          <div>{user.username}</div>
+          <span className={headerStyles.username}>{user.username}</span>
           <button onClick={handleLogout}>Log Out</button>
         </div>
       ) : (

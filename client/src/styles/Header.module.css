@@ -1,5 +1,5 @@
 .header {
-  background-color: orange;
+  background-color: #e9edc9;
   position: absolute;
   top: 0;
   left: 0;
@@ -15,10 +15,43 @@
   display: flex;
 }
 
+.header * {
+  color: black;
+}
+
 .header>div>* {
   margin: 4px;
 }
 
+header a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
 .header>* {
   padding: 10px;
+}
+
+.header button {
+  background-color: #CCD5AE;
+  border: #CCD5AE 1px solid;
+  cursor: pointer;
+  height: 80%;
+  width: 75px;
+}
+
+.header button:hover {
+  background-color: #a9b384;
+}
+
+.header button:active {
+  background-color: #9ea978;
+}
+
+.username {
+  font-weight: 700;
 }

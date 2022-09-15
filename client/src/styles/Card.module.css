@@ -1,3 +1,72 @@
-.button {
+.card {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid black;
+  background-color: #faedcd;
+  box-shadow: 3px 10px 10px 10px #faedcd20;
+  width: 60%;
+  min-height: 200px;
+  align-self: center;
+}
+
+.cardContainer {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.card>div {
+  width: 100%;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.flip {
   margin-top: auto;
+  background-color: #D4A373;
+  border: 1px black solid;
+  cursor: pointer;
+  width: 10%;
+  height: 25px;
+  margin-bottom: 5px;
+}
+
+.flip:hover {
+  background-color: #b48351;
+}
+
+.flip:active {
+  background-color: #8d6134;
+}
+
+.lowerButtons {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.lowerButtons>div {
+  width: 200px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.lowerButtons button {
+  background-color: #E9EDC9;
+  height: 25px;
+  width: 50%;
+  margin: auto;
+  cursor: pointer;
+  border: 1px black solid;
+}
+
+.lowerButtons button:hover {
+  background-color: #CCD5AE;
+}
+
+.lowerButtons button:active {
+  background-color: #afbd81;
 }

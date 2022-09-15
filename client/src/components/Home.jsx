@@ -7,7 +7,16 @@ export const Home = () => {
   const [user] = useContext(UserContext);
   return (
     <div>
-      <div>Logged in as {user.username}</div>
+      <h2>
+        {new Date().getHours() > 17 ? (
+          <>Good evening, </>
+        ) : new Date().getHours() > 11 ? (
+          <>Good afternoon, </>
+        ) : (
+          <>Good morning, </>
+        )}
+        {<>{user.username}!</>}
+      </h2>
       <ul>
         <li>
           <Link to={'/privatedecks'}>My Flashcard Decks</Link>

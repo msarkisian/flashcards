@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../userContext';
 import { DraftCard } from './DraftCard';
+import '../styles/Create.module.css';
 
 export const Create = ({ edit }) => {
   const [title, setTitle] = useState('');
@@ -17,7 +18,6 @@ export const Create = ({ edit }) => {
   useEffect(() => {
     if (!edit) {
       if (window.localStorage.getItem('deckDraft')) {
-        console.log(window.localStorage.getItem('deckDraft'));
         setDraft(JSON.parse(window.localStorage.getItem('deckDraft')));
       }
       if (window.localStorage.getItem('titleDraft'))

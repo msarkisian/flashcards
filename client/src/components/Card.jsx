@@ -50,23 +50,26 @@ export const Card = ({ deck, personal }) => {
       <div>
         {cards.length} card{cards.length !== 1 && <>s</>} remaining
       </div>
-      <div className="card">
+      <div className={cardStyles.card}>
         {front ? <h4>{cards[0].front}</h4> : <h4>{cards[0].back}</h4>}
         <div>
-          <button
-            className={cardStyles.button}
-            onClick={() => setFront(!front)}
-          >
+          <button className={cardStyles.flip} onClick={() => setFront(!front)}>
             Flip
           </button>
         </div>
       </div>
-      <div>
-        <button onClick={nextCard}>Next</button>
-        <button onClick={removeCard}>Remove</button>
-        <button onClick={shuffleCards}>Shuffle</button>
+      <div className={cardStyles.lowerButtons}>
+        <div>
+          <button onClick={removeCard}>Remove card</button>
+          <button onClick={nextCard}>Next card</button>
+        </div>
+        <div>
+          <button onClick={shuffleCards}>Shuffle deck</button>
+        </div>
       </div>
-      <Link to={'/'}>Go home</Link>
+      <div>
+        <Link to={'/'}>Go home</Link>
+      </div>
     </>
   );
 };

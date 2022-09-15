@@ -1,17 +1,27 @@
 html {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fefae0;
 }
 
 body {
   margin-top: 50px;
 }
 
-.card {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 5px;
+}
+
+#root {
   display: flex;
   flex-flow: column wrap;
-  align-items: center;
-  justify-content: space-between;
-  border: 1px solid black;
-  width: 60%;
-  min-height: 200px;
 }
