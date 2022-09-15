@@ -25,7 +25,7 @@ app.use('/login', loginRouter);
 app.use('/decks', decksRouter);
 app.use('/userdecks', userDecksRouter);
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   try {
     res.sendFile(path.resolve('client/dist/index.html'));
   } catch (err) {

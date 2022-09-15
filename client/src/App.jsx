@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import { Create } from './components/Create';
 import { Header } from './components/Header';
@@ -45,6 +46,7 @@ function App() {
           <Route path="/study/:deckId" element={<Study personal={false} />} />
           <Route path="/create" element={<Create edit={false} />} />
           <Route path="/edit/:deckId" element={<Create edit={true} />} />
+          <Route path="*" element={<Navigate to={'/'} replace />} />
         </Routes>
       </UserContext.Provider>
     </>
