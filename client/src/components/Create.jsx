@@ -162,7 +162,7 @@ export const Create = ({ edit }) => {
         )}
         {sumbitError && (
           <div>
-            Deck requires a title. and all cards must have a front and a back.
+            Deck requires a title, and all cards must have a front and a back.
           </div>
         )}
         <Link to={'/privatedecks'}>Go back</Link>

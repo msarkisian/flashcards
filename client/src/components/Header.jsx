@@ -11,6 +11,7 @@ export const Header = () => {
       method: 'DELETE',
     }).then(() => {
       setUser(null);
+      localStorage.clear();
       navigate('/');
     });
   };
